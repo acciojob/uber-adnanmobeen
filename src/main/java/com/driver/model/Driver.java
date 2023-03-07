@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "drivers")
+@Table
 public class Driver {
 
     @Id
