@@ -26,6 +26,8 @@ public class Customer {
         this.tripBookingList = tripBookingList;
     }
 
+
+
     public List<TripBooking> getTripBookingList() {
         return tripBookingList;
     }
