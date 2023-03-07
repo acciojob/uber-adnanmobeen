@@ -36,11 +36,6 @@ public class Customer {
         this.tripBookingList = tripBookingList;
     }
 
-    public Customer(int customerId, String mobile, String password) {
-        this.customerId = customerId;
-        this.mobile = mobile;
-        this.password = password;
-    }
 
     public Customer() {
     }
