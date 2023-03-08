@@ -96,6 +96,12 @@ public class CustomerServiceImpl implements CustomerService {
 		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBooking.setBill(0);
 		tripBooking.getDriver().getCab().setAvailable(true);
+		Driver driver = tripBooking.getDriver();
+
+		/*by saving driver cab will also be saved automatically and we need to save cab because cab's attribute
+		is updated from not available to available */
+		driverRepository2.save(driver);
+
 		tripBookingRepository2.save(tripBooking);
 
 	}
@@ -116,6 +122,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 		tripBooking.setBill(distance * rate);
 		tripBooking.getDriver().getCab().setAvailable(true);
+
+		/*by saving driver cab will also be saved automatically and we need to save cab because cab's attribute
+		is updated from not available to available */
+
+		driverRepository2.save(driver);
+
 
 		tripBookingRepository2.save(tripBooking);
 
