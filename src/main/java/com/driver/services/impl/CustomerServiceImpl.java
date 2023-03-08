@@ -1,6 +1,7 @@
 package com.driver.services.impl;
 
 import com.driver.model.*;
+import com.driver.repository.CabRepository;
 import com.driver.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	TripBookingRepository tripBookingRepository2;
+
+	@Autowired
+	CabRepository cabRepository;
 
 	@Override
 	public void register(Customer customer) {
@@ -96,11 +100,12 @@ public class CustomerServiceImpl implements CustomerService {
 		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBooking.setBill(0);
 		tripBooking.getDriver().getCab().setAvailable(true);
-		Driver driver = tripBooking.getDriver();
 
-		/*by saving driver cab will also be saved automatically and we need to save cab because cab's attribute
-		is updated from not available to available */
-		driverRepository2.save(driver);
+		/*
+		here we need to save the cab because it's attribute is updated for availability.
+		 */
+		Cab cab = tripBooking.getDriver().getCab();
+		cabRepository.save(cab);
 
 		tripBookingRepository2.save(tripBooking);
 
@@ -123,10 +128,10 @@ public class CustomerServiceImpl implements CustomerService {
 		tripBooking.setBill(distance * rate);
 		tripBooking.getDriver().getCab().setAvailable(true);
 
-		/*by saving driver cab will also be saved automatically and we need to save cab because cab's attribute
-		is updated from not available to available */
-
-		driverRepository2.save(driver);
+		/*
+		here we need to save the cab because it's attribute is updated for availability.
+		 */
+		cabRepository.save(cab);
 
 
 		tripBookingRepository2.save(tripBooking);
