@@ -1,5 +1,6 @@
 package com.driver.services.impl;
 
+import com.driver.controllers.CustomerController;
 import com.driver.model.Cab;
 import com.driver.model.TripBooking;
 import com.driver.model.TripStatus;
@@ -21,6 +22,9 @@ public class DriverServiceImpl implements DriverService {
 
 	@Autowired
 	CabRepository cabRepository3;
+
+	@Autowired
+	CustomerController customerController;
 
 	@Override
 	public void register(String mobile, String password){
@@ -50,6 +54,7 @@ public class DriverServiceImpl implements DriverService {
 		for(TripBooking tripBooking:tripBookingList){
 			if (tripBooking.getStatus() == TripStatus.CONFIRMED){
 				tripBooking.setStatus(TripStatus.CANCELED);
+				customerController.cancelTrip(tripBooking.getTripBookingId());
 			}
 		}
 

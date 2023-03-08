@@ -39,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
 		for(TripBooking tripBooking:tripBookingList){
 			if(tripBooking.getStatus() == TripStatus.CONFIRMED){
 				tripBooking.setStatus(TripStatus.CANCELED);
+				cancelTrip(tripBooking.getTripBookingId());
 			}
 		}
 
